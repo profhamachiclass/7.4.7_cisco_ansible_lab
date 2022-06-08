@@ -414,8 +414,8 @@ Much of this playbook is similar to the playbook you created in the previous Par
 
 The following is a brief description of the items in the task:
 *   ios_config: - This is an Ansible module used to configure an IOS device. You can use the ansible-doc ios_config command to see the details for the parents and lines parameters used in this playbook.
-*   parents: "interface GigabitEthernet1" - This parameter indicates the IOS interface configuration mode.
-*   lines: - An ordered set of IOS commands are configured in this section, specifying the IPv6 addressing information for the GigabitEthernet1 interface.
+*   parents: "interface Loopback 999" - This parameter indicates the IOS interface configuration mode.
+*   lines: - An ordered set of IOS commands are configured in this section, specifying the IPv6 addressing information for the Loopback 999 interface.
 
 The rest of the playbook is similar to the tasks in the previous Part. The second task uses the ios_command module and the command show ipv6 interface brief to display output and send it to the register output.
 
@@ -438,10 +438,10 @@ Using ~/ansible/iosxe/ansible.cfg as config file
 PLAY [CONFIGURE IPv6 ADDRESSING] ***********************************************
 
 TASK [SET IPv6 ADDRESS] ********************************************************
-changed: [iosxe] => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3"}, "banners": {}, "changed": true, "commands": ["interface GigabitEthernet1", "description IPv6 ADDRESS", "ipv6 address 2001:db8:acad:1::1/64", "ipv6 address fe80::1:1 link-local"], "updates": ["interface GigabitEthernet1", "description IPv6 ADDRESS", "ipv6 address 2001:db8:acad:1::1/64", "ipv6 address fe80::1:1 link-local"]}
+changed: [iosxe] => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3"}, "banners": {}, "changed": true, "commands": ["interface Loopback 999", "description IPv6 ADDRESS", "ipv6 address 2001:db8:acad:1::1/64", "ipv6 address fe80::1:1 link-local"], "updates": ["interface Loopback 999", "description IPv6 ADDRESS", "ipv6 address 2001:db8:acad:1::1/64", "ipv6 address fe80::1:1 link-local"]}
 
 TASK [SHOW IPv6 INTERFACE BRIEF] ***********************************************
-ok: [iosxe] => {"changed": false, "stdout": ["Loopback 999       [up/up]\n    FE80::1:1\n    2001:DB8:ACAD:1::1"], "stdout_lines": [["GigabitEthernet1       [up/up]", "    FE80::1:1", "    2001:DB8:ACAD:1::1"]]}
+ok: [iosxe] => {"changed": false, "stdout": ["Loopback 999       [up/up]\n    FE80::1:1\n    2001:DB8:ACAD:1::1"], "stdout_lines": [["Loopback 999       [up/up]", "    FE80::1:1", "    2001:DB8:ACAD:1::1"]]}
 
 TASK [SAVE OUTPUT ./ios_configurations/] ***************************************
 ok: [iosxe] => {"changed": false, "checksum": "60784fbaae4bd825b7d4f121c450effe529b553c", "dest": "ios_configurations/IPv6_output_iosxe.txt", "gid": 900, "group": "devasc", "mode": "0664", "owner": "devasc", "path": "ios_configurations/iosxe.txt", "size": 67, "state": "file", "uid": 900}
@@ -455,7 +455,7 @@ The first time you run the playbook, the PLAY RECAP should display ok=3 changed=
 In VS Code, open the ios_configurations folder and click the IPv6_output_iosxe.txt file. You can also use the terminal window to view the file with cat ios_configurations/IPv6_output_iosxe.txt. You now have a backup of the CSR1000v configuration.
 
 devasc@labvm:~/ansible/iosxe$ cat ios_configurations/IPv6_output_iosxe.txt 
-GigabitEthernet1       [up/up]
+Loopback 999       [up/up]
     FE80::999:1
     2001:DB8:ACAD:999::1
 ```
