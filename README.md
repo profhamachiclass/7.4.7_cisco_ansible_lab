@@ -302,7 +302,7 @@ The second task is to save the output:
 *- name: SAVE OUTPUT TO ./backups/ - Name of the task
 *   copy: - This is an Ansible module used to copy files to a remote location. There are two parameters associated with this module:
 *   content: "{{ config.stdout[0] }}" - The specified value for this parameter is the data stored in the config variable, the Ansible register variable used in the previous task. Standard output (stdout) is the default file descriptor where a process can write output used in Unix-like operating systems, such as Linux and Mac OS X.
-*   dest: "backups/show_run_{{ inventory_hostname }}.txt" - This is the path and file name to where the file should be copied. The inventory_hostname variable is an Ansible "magic variable" that automatically receives the hostname as configured in the hosts file. In your case, recall that this is iosxe. This parameter results in a file **show_run_CSR1kv.txt** stored in the backups directory. The file will contain the output of the show running-config command. You will create the backups directory in the next step.
+*   dest: "backups/show_run_{{ inventory_hostname }}.txt" - This is the path and file name to where the file should be copied. The inventory_hostname variable is an Ansible "magic variable" that automatically receives the hostname as configured in the hosts file. In your case, recall that this is iosxe. This parameter results in a file **show_run_iosxe.txt** stored in the backups directory. The file will contain the output of the show running-config command. You will create the backups directory in the next step.
 
 ### Step 3: Run the Ansible backup Playbook.
 - a.	Create the backups directory. As indicated in the last line of your playbook, this is the directory where the backup configuration file will be stored.
@@ -317,13 +317,13 @@ ansible-playbook backup_cisco_router_playbook.yaml
 PLAY [AUTOMATIC BACKUP OF RUNNING CONFIG] *****************************************
 
 TASK [DISPLAYING THE RUNNING-CONFIG] **********************************************
-ok: [CSR1kv]
+ok: [iosxe]
 
 TASK [SAVE OUTPUT TO ./backups/] **************************************************
-changed: [CSR1kv]
+changed: [iosxe]
 
 PLAY RECAP ************************************************************************
-CSR1kv : **ok=2**  **changed=1**  unreachable=0  failed=0 skipped=0 rescued=0  ignored=0 
+iosxe : **ok=2**  **changed=1**  unreachable=0  failed=0 skipped=0 rescued=0  ignored=0 
 ```
 
 Note: In many examples you will see the playbook run using the -i inventory-filename option. For example:
@@ -373,7 +373,7 @@ In this Part, you will create another Ansible playbook to configure IPv6 address
 ```yaml
 devasc@labvm:~/ansible/$ cat hosts
 # Enter the hosts or devices for Ansible playbooks
-CSR1kv ansible_user=developer ansible_password=C1sco12345 ansible_host=sandbox-iosxe-recomm-1.cisco.com
+iosxe ansible_user=developer ansible_password=C1sco12345 ansible_host=sandbox-iosxe-recomm-1.cisco.com
 ```
 ### Step 2: Create a new playbook.
 - a.	Create a new file in the **~/ansible/iosxe** directory with the following name:
