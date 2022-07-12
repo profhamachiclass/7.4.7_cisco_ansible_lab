@@ -1,5 +1,5 @@
-# Cisco Ansible Lab. Alternate v2022 by profhamachi.
-Use Ansible to Back Up and Configure a Cisco Device. Alternate lab v2022.
+# 7.4.7 Lab - Use Ansible to Back Up and Configure a Device
+Use Ansible to Back Up and Configure a Cisco Device. Alternate Cisco DevNet lab v2022 by profhamachi.
 
 ## Notes on alternative Cisco Always-On Public Sandboxes
 As of this writing, Cisco Always-on Public Sandboxes of the CSR1kv are located here:
